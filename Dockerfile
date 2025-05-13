@@ -1,11 +1,15 @@
-FROM openjdk:8u151-jdk-alpine3.7
+# Use Maven to build the application
+FROM maven:3.9.3-eclipse-temurin-17 AS build
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
 
-EXPOSE 8070
+# Use a lightweight JRE to run the application
+FROM eclipse-temurin:17-jre
+WORKDIR /app
 
-ENV APP_HOME /src/app
+# Copy the built jar file from the previous stage
+COPY --from=build /app/target/demo-1.0-SNAPSHOT.jar app.jar
 
-COPY target/shopping-cart-0.0.1-SNAPSHOT.jar $APP_HOME/app.jar
-
-WORKDIR $APP_HOME
-
-ENTRYPOINT exec java -jar app.jar
+# Set the entry point
+ENTRYPOINT ["java", "-jar", "app.jar"]
