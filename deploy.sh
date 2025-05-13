@@ -5,7 +5,7 @@ IMAGE_NAME="sreevadhani30/mave"
 LOCAL_TAG="test"
 
 # Step 1: Build Docker image
-docker build -t $LOCAL_TAG -f docker/Dockerfile .
+docker build -t $LOCAL_TAG -f Dockerfile .
 
 # Step 2: Authenticate to Docker Hub
 echo "30-Aug-04" | docker login -u sreevadhani30 --password-stdin
