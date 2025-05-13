@@ -8,7 +8,7 @@ LOCAL_TAG="test"
 docker build -t $LOCAL_TAG -f Dockerfile .
 
 # Step 2: Authenticate to Docker Hub
-echo "30-Aug-04" | docker login -u sreevadhani30 --password-stdin
+echo "soundbetter" | docker login -u sreevadhani30 --password-stdin
 
 # Step 3: Tag and push image to Docker Hub
 docker tag $LOCAL_TAG $IMAGE_NAME
